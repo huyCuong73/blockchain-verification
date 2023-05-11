@@ -3,28 +3,32 @@ require("@nomiclabs/hardhat-etherscan")
 require("hardhat-gas-reporter")
 require("hardhat-deploy")
 
+const dotenv = require("dotenv")
+dotenv.config()
+
 /** @type import('hardhat/config').HardhatUserConfig */
+
 module.exports = {
     defaultNetwork: "hardhat",
     networks: {
         sepolia: {
-            url: "https://eth-sepolia.g.alchemy.com/v2/Ge8eGKZy28WQiTtPQIy7-vRl7Pdr7sz8",
-            accounts: ["cf79932212a550f30db97ca8e253dcf5556905fe2dddb4bb95e86f25c6959c98"],
+            url: process.env.ALCHEMY_SEPOLIA,
+            accounts: [process.env.ACCOUNT],
             chainId: 11155111
         },
         goerli: {
-          url: "https://eth-goerli.g.alchemy.com/v2/XnacWRA62mI8td_pOMuqJwLOURTPEzCZ",
-          accounts: ["cf79932212a550f30db97ca8e253dcf5556905fe2dddb4bb95e86f25c6959c98"],
-          chainId: 5
+            url: process.env.ALCHEMY_GOERLI,
+            accounts: [process.env.ACCOUNT],
+            chainId: 5
         },
         localhost: {
-          url: "http://127.0.0.1:8545/",
-          chainId: 31337,
+            url: "http://127.0.0.1:8545/",
+            chainId: 31337,
         }
         
     },
     etherscan: {
-      apiKey: "NXUWW5H5KDXYAJF6W2BE88YHNT1Z9MEXTC"
+        apiKey: process.env.ETHERSCAN_KEY
     },
     solidity: {
         compilers: [
